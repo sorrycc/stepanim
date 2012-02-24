@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8" /><title>Step Anim Demo</title></head>
+<body>
+
+<style>
+  #demo1 {
+    width: 108px;
+    height: 100px;
+    background: url(imgs/monkey12-smile.png) no-repeat;
+  }
+  #demo1:hover {
+    background-position: -108px 0;
+  }
+  #demo2 {
+    width: 130px;
+    height: 130px;
+    background: url(imgs/meteor.png) no-repeat;
+  }
+  #demo3 {
+    width: 75px;
+    height: 75px;
+    background: url(imgs/wangwang.png) no-repeat;
+  }
+</style>
+
+<h2>1. Google 动画 —— 孙悟空 (点击后执行序列)</h2>
+<div id="demo1"></div>
+<br><br>
+<h2>2. 钻石 (无限重复)</h2>
+<div id="demo2"></div>
+<br><br>
+<h2>3. 旺旺 (点击开始和暂停动画)</h2>
+<div id="demo3"></div>
+
+<script src="stepanim.js"></script>
+<script>
+  // demo1
+  var demo1 = document.getElementById('demo1');
+  var anim1 = new StepAnim(demo1, {
+    next    : 2,
+    length  : 27,
+    complete: function() {
+      this.goto(0);
+    }
+  });
+  addEvent(demo1, 'click', function() {
+    anim1.isStoped && anim1.run();
+  });
+
+  // demo2
+  var demo2 = document.getElementById('demo2');
+  new StepAnim(demo2, {
+    length  : 49,
+    delay: 45,
+    isInfinity: true
+  }).run();
+
+  // demo3
+  var demo3 = document.getElementById('demo3');
+  var anim3 = new StepAnim(demo3, {
+    next: 1,
+    length: 2,
+    delay: 200,
+    isInfinity: true
+  });
+  addEvent(demo3, 'click', function() {
+    anim3[anim3.isStoped?'run':'stop']();
+  });
+
+  //////////////////////
+  // utils
+
+  function addEvent(el, type, fn, capture) {
+    if (!el) return;
+    if (el.addEventListener) {
+      el.addEventListener(type, fn, !!capture);
+    } else if (el.attachEvent) {
+      el.attachEvent('on' + type, fn);
+    }
+  }
+</script>
+
+</body>
+</html>
