@@ -22,6 +22,11 @@
     height: 75px;
     background: url(imgs/wangwang.png) no-repeat;
   }
+  #demo4 {
+    width: 220px;
+    height: 80px;
+    background: url(http://img02.taobaocdn.com/tps/i2/T1N8mYXl4oXXXXXXXX-220-720.png) no-repeat;
+  }
 </style>
 
 <h2>1. Google 动画 —— 孙悟空 (点击后执行序列)</h2>
@@ -32,6 +37,9 @@
 <br><br>
 <h2>3. 旺旺 (点击开始和暂停动画)</h2>
 <div id="demo3"></div>
+<br><br>
+<h2>4. 消保 Logo</h2>
+<div id="demo4"></div>
 
 <script src="stepanim.js"></script>
 <script>
@@ -66,6 +74,20 @@
   });
   addEvent(demo3, 'click', function() {
     anim3[anim3.isStoped?'run':'stop']();
+  });
+
+  // demo4
+  var demo4 = document.getElementById('demo4');
+  var anim4 = new StepAnim(demo4, {
+    next: 1,
+    length: 8,
+    isV: true,
+    complete: function() {
+      this.goto(0);
+    }
+  });
+  addEvent(demo4, 'click', function() {
+    anim4[anim4.isStoped?'run':'stop']();
   });
 
   //////////////////////

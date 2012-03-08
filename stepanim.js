@@ -14,7 +14,7 @@
     mix(this, {
       isStoped: true,
       to      : ('to' in this) ? this.to : (this.length - 1),
-      size    : ('size' in this) ? this.size : this.el.clientWidth
+      size    : ('size' in this) ? this.size : (this.isV ? this.el.clientHeight : this.el.clientWidth)
     });
   }
 
@@ -47,7 +47,8 @@
     },
 
     _anim: function() {
-      this.el.style.backgroundPosition = '-'+(this.next||0)*this.size+'px 0';
+      var pos = (this.next||0) * this.size;
+      this.el.style.backgroundPosition = this.isV ? ('0 -'+pos+'px') : ('-'+pos+'px 0');
       this.current = this.next;
       this._calulateNext();
     },
